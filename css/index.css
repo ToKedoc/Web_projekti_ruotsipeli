@@ -1,0 +1,19 @@
+
+header {
+    background-color: blue;
+    padding: 20px;
+}
+
+footer {
+    background-color: blue;
+    padding: 20px;
+}
+
+main {
+    background-color: yellow;
+    padding: 20px;
+    min-height: calc(100vh - 120px);
+    box-sizing: border-box;
+    
+}
+
