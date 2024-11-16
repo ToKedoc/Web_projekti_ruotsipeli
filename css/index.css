@@ -1,19 +1,43 @@
 
 header {
-    background-color: blue;
+    background-color: rgb(94, 8, 232);
     padding: 20px;
 }
 
 footer {
-    background-color: blue;
+    background-color: rgb(94, 8, 232);
     padding: 20px;
 }
 
 main {
-    background-color: yellow;
+    background-color: rgb(245, 245, 126);
     padding: 20px;
     min-height: calc(100vh - 120px);
-    box-sizing: border-box;
-    
+    box-sizing: border-box;    
+}
+
+.nav-item {
+    border: 3px solid rgb(245, 245, 126);
+    border-radius: 5px;
+    margin: 15px;
+    padding: 5px;
+}
+
+.nav-link {
+    color: rgb(245, 245, 126);
+    font-size: 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .nav-link {
+        font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
+    } 
+}
+
+.nav-link:hover {
+    color: rgba(245, 245, 126, 0.26);
 }
 
