@@ -31,13 +31,29 @@ main {
     display: block;
 }
 
+.nav-link.active {
+    color: rgb(245, 245, 126) !important;
+    font-weight: normal !important;
+
+}
+.nav-link:hover {
+    color:rgba(245, 245, 126, 0.26) !important ;
+}
+
 @media (min-width: 768px) {
     .nav-link {
         font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
     } 
 }
 
-.nav-link:hover {
-    color: rgba(245, 245, 126, 0.26);
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
