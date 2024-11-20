@@ -30,6 +30,12 @@ main {
     display: block;
 }
 
+.nav-link.active {
+    color: rgb(245, 245, 126) !important;
+    font-weight: normal !important;
+
+}
+
 @media (min-width: 768px) {
     .nav-link {
         font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
@@ -37,5 +43,9 @@ main {
 }
 
 .nav-link:hover {
-    color: rgba(245, 245, 126, 0.26);
+    color: rgba(245, 245, 126, 0.26) !important;
+}
+
+footer {
+    text-align: center;
 }
