@@ -1,0 +1,62 @@
+header {
+    background-color: rgb(94, 8, 232);
+    padding: 20px;
+}
+
+footer {
+    background-color: rgb(94, 8, 232);
+    padding: 20px;
+}
+
+main {
+    background-color: rgb(245, 245, 126);
+    padding: 20px;
+    min-height: calc(100vh - 120px);
+    box-sizing: border-box;    
+}
+
+.nav-item {
+    border: 3px solid rgb(245, 245, 126);
+    border-radius: 5px;
+    margin: 15px;
+    padding: 5px;
+}
+
+.nav-link {
+    color: rgb(245, 245, 126);
+    font-size: 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-link.active {
+    color: rgb(245, 245, 126) !important;
+    font-weight: normal !important;
+
+}
+.nav-link:hover {
+    color:rgba(245, 245, 126, 0.26) !important ;
+}
+
+@media (min-width: 768px) {
+    .nav-link {
+        font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
+    } 
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+}
