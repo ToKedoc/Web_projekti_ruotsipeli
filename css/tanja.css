@@ -64,3 +64,23 @@ footer {
 .name {
     text-align: center;
 }
+
+.buttons {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    gap: 15px;
+    
+}
+
+.image1 {
+   
+    display: flex;
+    position: relative;
+    top: 80px; 
+    left: 50%;
+    transform: translateX(-50%); /* chat gpt: tämä korjaa kuvan sijoittumisen tarkasti keskelle */
+  
+} 
