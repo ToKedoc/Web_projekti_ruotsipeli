@@ -84,3 +84,13 @@ footer {
     transform: translateX(-50%); /* chat gpt: tämä korjaa kuvan sijoittumisen tarkasti keskelle */
   
 } 
+
+.word {
+    text-align:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+    top: 130px
+}
