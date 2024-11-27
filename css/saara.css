@@ -66,4 +66,15 @@ footer {
     border-color: rgb(42, 2, 106);
   }
 
-  
+  #check {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: rgb(94, 8, 232);
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: rgb(245, 245, 126);
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(42, 2, 106);
+    cursor: pointer;
+  }
