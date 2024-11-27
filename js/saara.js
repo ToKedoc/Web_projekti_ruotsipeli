@@ -15,3 +15,4 @@ const sentences = [
     "Jag använder IT-kunskaper i mitt arbete",
     "Jag behöver en dator på jobbet varje dag"
 ] 
+
