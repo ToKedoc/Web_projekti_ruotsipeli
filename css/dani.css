@@ -49,3 +49,22 @@ main {
 footer {
     text-align: center;
 }
+
+
+/*Uutta asiaa*/
+/* Pelialueen asettelua */
+
+
+.kortti {
+    width: 100px; 
+    height: 100px; 
+    margin: 15px; 
+    border-radius: 5px;
+    object-fit: cover; 
+}
+
+#pelialue {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
