@@ -49,3 +49,21 @@ main {
 footer {
     text-align: center;
 }
+
+/*Luo tyylit,värit ja rakenteen sivuston "lause" laatikoita varten*/
+.box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px auto;
+    padding: 10px;
+    min-height: 50px;
+    width: 80%;
+    background-color: rgb(94, 8, 232);
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(42, 2, 106);
+  }
+
+  
