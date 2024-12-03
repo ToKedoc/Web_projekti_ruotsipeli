@@ -16,3 +16,10 @@ const sentences = [
     "Jag behöver en dator på jobbet varje dag"
 ] 
 
+//lasketaan missä lauseessa mennään
+let sentenceIndex = 0
+
+//haetaan HTML-dokumentista elementti id:llä
+const finnBox = document.getElementById("finn-box")
+//Näytetään suomenkielinen lause sivulla
+finnBox.textContent = finnSentences[sentenceIndex]
