@@ -48,12 +48,22 @@
           </nav>    
     </header>
     <main>
-
+      <div id="timer">
+        Aika: <span id="timeElapse">00:00</span>
+      </div>
+        <table id="crossword"></table>
+        <div id="wordResult"></div>
+        <button id="checkButton">Tarkasta vastaukset</button>
+        <div id="word-container" style="display: none;">
+          <input id="wordInput" type="text" placeholder="Keskelle muodostuva sana?" />
+          <button id="checkWordButton">Tarkista</button>
+        </div>
     </main>
     <footer>
       <p>Ryhmä 14 Svenska spels<br>
         Tekijät: Toomas Mero, Tanja Happonen, Dani Uosukainen ja Saara Laine</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../js/toomas.js"></script>
 </body>
 </html>
