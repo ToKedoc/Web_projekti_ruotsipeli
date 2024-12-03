@@ -66,6 +66,7 @@ footer {
     border-color: rgb(42, 2, 106);
   }
 
+  /*Luo Värit, tyylit, tekstin asetukset tarkastusnappulalle*/
   #check {
     margin: 20px 0;
     padding: 10px 20px;
@@ -77,4 +78,17 @@ footer {
     border-radius: 5px;
     border-color: rgb(42, 2, 106);
     cursor: pointer;
+  }
+
+  /*keskittää sisällön tekstin keskelle*/
+  main {
+    text-align: center;
+  }
+
+  /*Luo suomilause laatikon tekstiin tyylin*/
+  #finn-box {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: rgb(245, 245, 126);
   }
