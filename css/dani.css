@@ -56,9 +56,9 @@ footer {
 
 
 .kortti {
-    width: 100px; 
-    height: 100px; 
-    margin: 15px; 
+    width: 230px; 
+    height: 230px; 
+    margin: 10px; 
     border-radius: 5px;
     object-fit: cover; 
 }
@@ -67,4 +67,6 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 50px;
+    gap: 10px;
 }

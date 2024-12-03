@@ -11,16 +11,23 @@ const kuvat = [
     { kuva: '../images/images_dani/kuva9.png', id: 9 },
 ];
 
+// Luo kortit: yhdistä jokainen kuva itsensä kanssa (luo parit)
+const kortit = [...kuvat, ...kuvat];
+
+
+// Sekoita kortit
+kortit.sort(() => Math.random() - 0.5);
+
 // Pelialueen haku
 const pelialue = document.getElementById('pelialue');
 
 // Lisää kuvat pelialuelle
-kuvat.forEach((kortti) => {
+kortit.forEach((kortti) => {
     const kuvaElementti = document.createElement('img');
     kuvaElementti.src = kortti.kuva; //Asetetaan kuvan lähde
-    kuvaElementti.alt = `Kortti ${kortti.id}`; // Alt-teksti
-    kuvaElementti.classList.add('kortti'); // Lisätään mahdollinen css-luokka
+    kuvaElementti.alt = `Kortti ${kortti.id}`;
+    kuvaElementti.classList.add('kortti'); 
 
-    // Lisää kuvat pelialueelle
+    
     pelialue.appendChild(kuvaElementti);
 });
