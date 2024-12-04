@@ -21,8 +21,8 @@ let sentenceIndex = 0
 
 //haetaan HTML-dokumentista elementti id:llä
 const finnBox = document.getElementById("finn-box")
-const sentencebox = document.getElementById("sentence-box")
-const wordbox = document.getElementById("word-box")
+const sentenceBox = document.getElementById("sentence-box")
+const wordBox = document.getElementById("word-box")
 
 //Näytetään suomenkielinen lause sivulla
 finnBox.textContent = finnSentences[sentenceIndex]
@@ -44,6 +44,21 @@ mixWords.forEach(word => {
     wordElement.className = "word"
     //asettaa kierroksessa olevan word muuttujan arvon elementin arvoksi
     wordElement.textContent = word
+
+    //sanalaatikon sanaa klikkaamalla, se lisätään muodostettavaan lauseeseen 
+    //funktion "addWordToSentence avulla"
+    wordElement.addEventListener("click", () => addWordToSentence(wordElement))
+
     //vie sanat paikalleen sanalaatikkoon sivulla
-    wordbox.appendChild(wordElement)
-})
+    wordBox.appendChild(wordElement)
+}) 
+
+//Funktio, jotka lisää ruotsinkielisen valitun sanan lauseeseen
+function addWordToSentence(wordElement) {
+    //Hakee käyttäjän valitseman sanan wordElementin textContentista, ja lisää 
+    //sanan välilyönni kanssa html:llän sentenceboxiin/lauselaatikkoon
+    sentenceBox.textContent += wordElement.textContent + " "
+    //Poistaa jo käytetyn/valitun sanan wordboxista/valittujen sanojen laatikosta
+    //Jotta sitä ei voida käyttää uudelleen
+    wordBox.removeChild(wordElement)
+}
