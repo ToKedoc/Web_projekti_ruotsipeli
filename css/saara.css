@@ -66,6 +66,7 @@ footer {
     border-color: rgb(42, 2, 106);
   }
 
+  /*Luo Värit, tyylit, tekstin asetukset tarkastusnappulalle*/
   #check {
     margin: 20px 0;
     padding: 10px 20px;
@@ -78,3 +79,35 @@ footer {
     border-color: rgb(42, 2, 106);
     cursor: pointer;
   }
+
+  /*keskittää sisällön tekstin keskelle*/
+  main {
+    text-align: center;
+  }
+
+  /*Luo suomilause laatikon tekstiin tyylin*/
+  #finn-box {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: rgb(245, 245, 126);
+  }
+
+  /*luo sanalaatikon tekstille tyylin ja sanoille laatikot*/
+  .word {
+    padding: 10px 20px;
+    background-color: rgb(245, 245, 126);
+    color: rgb(42, 2, 106);
+    border: solid;
+    font-size: 1.2rem;
+    border-color: rgb(253, 253, 73);
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /*luo sanalaatikoille hover-efektin kohdalle osuessa*/
+  .word:hover {
+    background-color: rgb(94, 8, 232);
+  }
+  
