@@ -1,6 +1,6 @@
 const images = [
-    '../images/img1.png','../images/img2.jpg','./img3.png','./img4.webp',
-    './img5.png','./img6.jpg','./img7.png','./img8.jpg','./img9.png','./img10.webp'
+    '../images_tanja/img1.png','../images/img2.jpg','../images/images_tanja/img3.png','../images/images_tanja/img4.webp',
+    '../images/images_tanja/img5.png','../images/images_tanja/img6.jpg','../images/images_tanja/img7.png','../images/images_tanja/img8.jpg','../images/images_tanja/img9.png','../images/images_tanja/img10.webp'
 ];
 
 const options = [
