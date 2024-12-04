@@ -43,8 +43,51 @@ for (let y = 0; y < maxY; y++) {    //Tehtään taulukko käyttämällä for sil
       const relevantWords = crossword.filter(   // Tämä käyttää metodia jolla suodatetaan taulukosta kaikki sanat jotka täsmäävät tietyn solun sijaintiin.
         ({ word, x: startX, y: startY }) =>     // Tämä ottaa sanan ja sen aloituksen sarakkeesta(x) ja rivistä(y)
             y === startY && x >= startX && x < startX + word.length // Tällä tarkastetaan, että taulukon solu on samalla rivillä kuin sana. 
-                                                                    // Tarkastetaan solun sarake numero(x) on sanan aloitussarakkeen kohdalla.
+                                                                    // Tarkastetaan että solun sarake numero(x) on sanan aloitussarakkeen kohdalla.
                                                                     // Ja tarkastetaan että solun sarakenumero(x) on sopiva sanan pituuteen
 
     );
-    
+    if (relevantWords.length === 0) { // Jos taulukko relevantWords on tyhjä poistetaan taulukon syöttökenttä
+      input.disabled = true;        
+      cell.classList.add("empty"); // Jos relevantWords on tyhjä lisätään HTMl solulle CSS luokka empty, eli muutetaan sen ulkoasua
+  } else {
+      
+      const correctLetter = relevantWords[0].word[x - relevantWords[0].x].toUpperCase(); // Lasketaan mikä kirjain kuuluu relevatWordstin mihinkin soluun
+      input.dataset.correct = correctLetter; // Lisätään dataset-attribuutti nimeltä correct, joka tallentaa solun oikean kirjaimen, myöhempää tarkastusta varten
+      input.addEventListener("keydown", (event) => handleKeyDown(event, input)); // Lisätään syöttökentälle EventListener joka aktivoituu aina kun pelaaja painaa jotain näppäimistön painiketta syöttökentässä
+      input.addEventListener("input", () => handleInput(input)); // Lisätään toinen tapahtumakuuntelija, joka aktivoituu kun pelaaja kirjoittaa, handle input käsittelee pelaajan syötteen
+  }
+  cell.appendChild(input); // Lisätään syöttökenttä HTML:n soluun
+  row.appendChild(cell); // Ja lisätään solu riviin
+}
+table.appendChild(row); // Lopuksi lisätään rivi taulukkoon
+}
+
+function handleKeyDown(event, input) { // Tehdään functio handleKeyDown, joka käsittelee
+  const { x, y } = input.dataset; // Haetaan arvot data-x ja data-y atribuuteista, objektista input.dataset,
+  const currentX = parseInt(x);  //currentX ja currentY käytetään määrittämään syöttökentän sijainti taulukossa, jotta tiedetään missä kentässä pelaaja on milloinkin
+  const currentY = parseInt(y);  // koska x ja y on alunperin merkkijonoja dataset:issä, muutetaan ne kokonaisluvuiksi käyttämällä functiota parseInt
+
+  if (event.key === "Enter") { // Jos pelaaja painaa "ENTER" painiketta, suoritetaan koodi
+      event.preventDefault(); // Tämä estää ENTERIN oletus toiminnot
+      const nextWord = crossword.find(({ y: startY }) => startY > currentY); // Käydään taulukon crossword sanat. Etsitään esimmäinen sana jonka y-koordinaatti(startY) on suurempi kuin nykyinen y-koordinaatti 
+                                                                            //  Tällä tavalla löydetään seuraavalla rivillä oleva sana
+      if (nextWord) {                                                       // Jos löydetään seuraava sana jatketaan koodin suorittamista
+          const nextInput = document.querySelector(                         //  Etsitään HTML-syöttökenttä jonka koordinaatit vastaa sanan aloituspaikkaa
+              `input[data-x="${nextWord.x}"][data-y="${nextWord.y}"]`       //  Etsitään input-elementti, jolla on atribuutti data-X tai data-y jonka arvo on nextWord.x tai nextWord.y
+          );                                                                // Yhdistämällä [data-x="${nextWord.x}"] ja [data-y="${nextWord.y}"] etsitään syöttökenttää joka täyttää molemmat ehdot
+          
+          if (nextInput) nextInput.focus();                                 // Jos syöttökenttä nextInput löytyy, käytetään NextInput.focus(), joka siirtää kohdistuksen kyseiseen kenttään.
+      }
+  } else if (event.key === "Backspace") {                                   // Tämä ehto tarkastetaan jos mikään edellä olevat ehdot eivät ollee tosia. Tämä tarkastaa onko painettu näppäin "BACKSPACE"
+      if (input.value) {                                                    // Luetaan syöttökentän sisältö, jos ehto on tosi siirrytään lohkon sisälle
+          input.value = "";                                                 // Tyhjennetään syöttökenttä muuttamalla sen arvoksi tyhjä merkkijono ""
+          event.preventDefault();                                           // Estetään BACKSPACE:n oletustoiminto, jotta ei tapahdu kauheuksia
+     
+        } else {                                                          // Jos syöttökenttä on tyhjä tarkastetaan tämä ehto
+          event.preventDefault();                                         // Estetään BACKSPACEN oletustoiminto
+          const prevInput = getPreviousInput(currentX, currentY);         // Tällä fuctiolla etsitään edellinen syöttökentä. Hyödynnetään nykyisen kentän currentX ja currentY koordinaatteja
+          if (prevInput) prevInput.focus();                               // Jos edellinen syöttökenttä löytyy, suoritaan lohkon sisältö, ja siirrytään edelliseen kenttään focus()-metodilla
+      }
+  }
+}
