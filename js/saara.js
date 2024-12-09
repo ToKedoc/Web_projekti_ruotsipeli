@@ -23,6 +23,7 @@ let sentenceIndex = 0
 const finnBox = document.getElementById("finn-box")
 const sentenceBox = document.getElementById("sentence-box")
 const wordBox = document.getElementById("word-box")
+const result = document.getElementById("result")
 
 //Näytetään suomenkielinen lause sivulla
 finnBox.textContent = finnSentences[sentenceIndex]
@@ -62,3 +63,23 @@ function addWordToSentence(wordElement) {
     //Jotta sitä ei voida käyttää uudelleen
     wordBox.removeChild(wordElement)
 }
+
+//Toimito, joka tarkistaa meneekö lause oikein tarkastus nappulaa painmalla
+// ja antaa siitä palautteen
+//hakee html-elementin id:llä ja painiketta klikkaamalla käynnistää kuuntelijan
+document.getElementById("check").addEventListener("click", () => {
+    //muuttuja, joka saa sisällökseen rakennetun lauseen, ilman välilyöntejä 
+    //lauseen lopussa tai alussa
+    const formedSentence = sentenceBox.textContent.trim()
+    //muuttuja, joka saa arvoksi menossa olevan lauseen
+    const sentence = sentences[sentenceIndex]
+
+    //tarkistaa on muodostettu lause täysin sama kuin oikea lause
+    //antaa kommentin käyttäjälle, jos lause on oikein
+    if (formedSentence === sentence) {
+        //lisää viestin html-elementtiin, jos lause on oikein ja näyttää käyttäjälle
+        result.textContent = "Ordentligt! Fin prestation. Oikein! Hieno suoritus."
+        //muuttaa lauseen tekstin vihreäksi
+        result.style.color = "green" 
+    }
+})
