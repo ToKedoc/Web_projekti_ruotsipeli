@@ -29,6 +29,7 @@ const result = document.getElementById("result")
 finnBox.textContent = finnSentences[sentenceIndex]
 
 //funktio joka alustaa pelin käyntiin, tyhjentää laatikot uudelle kierrokselle/lauseelle
+//hakee kierroksessa olevan lauseen ja sen sisältämät sanat, lisää sanat worBoxiin satunnaisessa järjestyksessä
 function initGame() {
     //tyhjentää laatikot
     //tyhjentää elementin wordBox, jotta uusi sanajoukko voidaan lisätä
@@ -37,33 +38,34 @@ function initGame() {
     sentenceBox.textContent =""
     //tyhjentää result elementin edellisestä kommentti tekstistä
     result.textContent = ""
+
+
+    //haetaan kierroksessa oleva lause ja sen sisältämät sanat
+    //haetaan lause
+    const sentence = sentences[sentenceIndex]
+    //jaetaan lause sanoiksi taulukkoon
+    const words = sentence.split(" ")
+    //luodaan taulukko kopio ja sijoitetaan siihen sanat satunnaisessa järjestyksessä
+    const mixWords = [...words].sort(() => Math.random() - 0.5)
+
+    //lisätään sanat word-boxiin satunnaisessa järjestyksessä
+    //käy läpi jokaisen alkion muuttujan mixWords-taulukosta ja tallentaa muuttujaan "word"
+    mixWords.forEach(word => {
+        //jokaisella kierroksella luodaan div elementti
+        const wordElement = document.createElement("div")
+        //lisää div elementille luokan, css tyylien luomiseksi
+        wordElement.className = "word"
+        //asettaa kierroksessa olevan word muuttujan arvon elementin arvoksi
+        wordElement.textContent = word
+
+        //sanalaatikon sanaa klikkaamalla, se lisätään muodostettavaan lauseeseen 
+        //funktion "addWordToSentence avulla"
+        wordElement.addEventListener("click", () => addWordToSentence(wordElement))
+
+        //vie sanat paikalleen sanalaatikkoon sivulla
+        wordBox.appendChild(wordElement)
+    }) 
 }
-
-//haetaan kierroksessa oleva lause ja sen sisältämät sanat
-//haetaan lause
-const sentence = sentences[sentenceIndex]
-//jaetaan lause sanoiksi taulukkoon
-const words = sentence.split(" ")
-//luodaan taulukko kopio ja sijoitetaan siihen sanat satunnaisessa järjestyksessä
-const mixWords = [...words].sort(() => Math.random() - 0.5)
-
-//lisätään sanat word-boxiin satunnaisessa järjestyksessä
-//käy läpi jokaisen alkion muuttujan mixWords-taulukosta ja tallentaa muuttujaan "word"
-mixWords.forEach(word => {
-    //jokaisella kierroksella luodaan div elementti
-    const wordElement = document.createElement("div")
-    //lisää div elementille luokan, css tyylien luomiseksi
-    wordElement.className = "word"
-    //asettaa kierroksessa olevan word muuttujan arvon elementin arvoksi
-    wordElement.textContent = word
-
-    //sanalaatikon sanaa klikkaamalla, se lisätään muodostettavaan lauseeseen 
-    //funktion "addWordToSentence avulla"
-    wordElement.addEventListener("click", () => addWordToSentence(wordElement))
-
-    //vie sanat paikalleen sanalaatikkoon sivulla
-    wordBox.appendChild(wordElement)
-}) 
 
 //Funktio, jotka lisää ruotsinkielisen valitun sanan lauseeseen
 function addWordToSentence(wordElement) {
@@ -97,7 +99,6 @@ document.getElementById("check").addEventListener("click", () => {
         result.textContent= "Fel! Väärin"
         result.style.color = "red"
     }
-})
 
     //Siirtyminen seuraavaan lauseeseen
     //lisää yhden muuttujaan sentenceIndex ja liikuttaa lauselaskuria lauseesta seuraavaan
@@ -113,6 +114,7 @@ document.getElementById("check").addEventListener("click", () => {
         result.textContent = "Du har slutfört alla meningar, game over! Olet suorittanut kaikki lauseet, peli loppu!"
         result.style.color = "green"
     }
+})
 
     //käynnistetään peli kutsumalla funktiota initGame
     initGame()
