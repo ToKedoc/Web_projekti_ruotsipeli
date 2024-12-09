@@ -81,5 +81,9 @@ document.getElementById("check").addEventListener("click", () => {
         result.textContent = "Ordentligt! Fin prestation. Oikein! Hieno suoritus."
         //muuttaa lauseen tekstin vihreäksi
         result.style.color = "green" 
+    } else {
+        //lisää viestin html-elementtiin, jos lause on väärin ja näyttää käyttäjälle
+        result.textContent= "Fel! Väärin"
+        result.style.color = "red"
     }
 })
