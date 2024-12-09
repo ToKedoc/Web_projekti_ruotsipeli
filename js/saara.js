@@ -28,6 +28,17 @@ const result = document.getElementById("result")
 //Näytetään suomenkielinen lause sivulla
 finnBox.textContent = finnSentences[sentenceIndex]
 
+//funktio joka alustaa pelin käyntiin, tyhjentää laatikot uudelle kierrokselle/lauseelle
+function initGame() {
+    //tyhjentää laatikot
+    //tyhjentää elementin wordBox, jotta uusi sanajoukko voidaan lisätä
+    wordBox.innerHTML = ""
+    //tyhjentää senteceBox elementin käyttäjän muodostamasta lauseesta
+    sentenceBox.textContent =""
+    //tyhjentää result elementin edellisestä kommentti tekstistä
+    result.textContent = ""
+}
+
 //haetaan kierroksessa oleva lause ja sen sisältämät sanat
 //haetaan lause
 const sentence = sentences[sentenceIndex]
@@ -87,3 +98,22 @@ document.getElementById("check").addEventListener("click", () => {
         result.style.color = "red"
     }
 })
+
+    //Siirtyminen seuraavaan lauseeseen
+    //lisää yhden muuttujaan sentenceIndex ja liikuttaa lauselaskuria lauseesta seuraavaan
+    sentenceIndex++;
+    //tarkistaa onko lauseita vielä jäljellä sentences-taulukossa ja jatkuuko näin ollen peli
+    //seuraavaan lauseeseen vai päättyykö
+    if (sentenceIndex < sentences.length) {
+        //asettaa aikaviiveen seuraavalle toiminnolle, jonka aikana käyttäjä, saa kommenti peliltä
+        //peli siirtyy joko seuraavaan lauseeseen tai päättyy
+        setTimeout(initGame, 3000)
+    } else {
+        //viesti html-elementtiin, näyttää käyttäjälle, että peli on päättynyt
+        result.textContent = "Du har slutfört alla meningar, game over! Olet suorittanut kaikki lauseet, peli loppu!"
+        result.style.color = "green"
+    }
+
+    //käynnistetään peli kutsumalla funktiota initGame
+    initGame()
+
