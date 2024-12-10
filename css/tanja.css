@@ -82,7 +82,7 @@ footer {
     top: 80px;  /* Siirtää kuvaa alaspäin */
     left: 50%;
     transform: translateX(-50%); /* chat gpt: tämä korjaa kuvan sijoittumisen tarkasti keskelle */
-    width: 300px;
+    width: 200px;
    
 } 
 
