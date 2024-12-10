@@ -63,6 +63,7 @@ for (let y = 0; y < maxY; y++) {    //Tehtään taulukko käyttämällä for sil
 table.appendChild(row); // Lopuksi lisätään rivi taulukkoon
 }
 
+
 function handleKeyDown(event, input) { // Tehdään functio handleKeyDown, joka käsittelee
   const { x, y } = input.dataset; // Haetaan arvot data-x ja data-y atribuuteista, objektista input.dataset,
   const currentX = parseInt(x);  //currentX ja currentY käytetään määrittämään syöttökentän sijainti taulukossa, jotta tiedetään missä kentässä pelaaja on milloinkin
@@ -91,3 +92,192 @@ function handleKeyDown(event, input) { // Tehdään functio handleKeyDown, joka 
       }
   }
 }
+
+function handleInput(input) {                                             // Tehdään functio handleInput joka aktivoituu kun pelaaja syöttää jotain ristikkoon
+  if (!startTime) {                                                       // Jos ristikon syöttökenttä aktivoidaan, ja ajastin ei ole käynnissä, aletaan suorittaa silmukkaa
+    startTimer();                                                         // Kutsutaan functiota startTimer. Ajastin käynnistetään
+  }
+
+  const { x, y } = input.dataset;                                         // Haetaan arvot data-x ja data-y atribuuteista, objektista input.dataset,
+  const currentX = parseInt(x);                                           //currentX ja currentY käytetään määrittämään syöttökentän sijainti taulukossa, jotta tiedetään missä kentässä pelaaja on milloinkin
+  const currentY = parseInt(y);                                           // koska x ja y on alunperin merkkijonoja dataset:issä, muutetaan ne kokonaisluvuiksi käyttämällä functiota parseInt
+
+  const nextInput = getNextInput(currentX, currentY);                     // Selvitetään missä Input-kentässä pelaaja on ,jotta tiedetään koska mihin kenttään voidaan seuraavaksi siirtyä.
+  if (nextInput) nextInput.focus();                                       // Siirretään pelaaja seuraavaan kenttään.
+}
+
+function getNextInput(x, y) {                                             // Tehdään functio getNextInput joka etsii seuraavan syöttökentän koordinaattien x ja y perusteella
+  const nextX = x + 1;                                                    // Lasketaan mikä on seuraavan syöttökentän sarakenumero, lisäämällä nykyiseen x + 1
+  const nextInput = document.querySelector(                               // Haetaan HTML:stä syöttökenttä joka on seuraavassa  samalla rivillä (y)
+      `input[data-x="${nextX}"][data-y="${y}"]:not([disabled])`           // Varmistetaan että kenttä ei ole pois käytöstä
+  );
+  if (nextInput) {                                                        // Tarkastetaan löytyykö kenttä samalta riviltä
+      return nextInput;                                                   // Jos kenttä löytyy siirrytään siihen
+  } else {                                                                // Jos kenttää ei löydy siirrytään etsimään seuraavalta riviltä
+      const nextWord = crossword.find(({ y: startY }) => startY > y);     // Tämä etsii ristikosta ensimmäisen sanan, jonka aloitus rivi on suurempi kuin nykyinen rivi (y)
+      if (nextWord) {                                                     // Tämä tarkastaa löytyykö seuraava sana
+          return document.querySelector(                                  // Jos seuraava sana löytyy siirrytään sen ensimmäiseen syöttökenttään
+              `input[data-x="${nextWord.x}"][data-y="${nextWord.y}"]`     // Sen aloitus koordinaattien perusteella
+          );
+      }
+  }
+  return null;                                                            // Jos seuraavaa kenttää ei löydy, palautetaan null, eli ei tehdä mitään        
+}
+
+function getPreviousInput(x, y) {                                         // Tehdään functio joka etsii edellisen syöttökentän annettujen koordinaattien x ja y perusteella
+  const prevX = x - 1;                                                    // Lasketaan mikä on edellisen syöttökentän sarakkeen numero vähentämällä nykyisestä x - 1
+  const prevInput = document.querySelector(                               // Haetaan HTML taulukosta syöttökenttä joka sijaitsee samalla rivillä (y)
+      `input[data-x="${prevX}"][data-y="${y}"]:not([disabled])`           // Varmistetaan että edellinen kenttä ei ole pois käytöstä
+  );
+  if (prevInput) {                                                        // Jos kenttä löytyy siirrytään kenttään
+      return prevInput;
+  } else {                                                                // Jos kenttää ei löydy samalta riviltä, siirrytään etsimään edellisen rivin viimeistä sanaa 
+      
+    const previousWords = crossword.filter(({ y: startY }) => startY < y); // Etsitään ristikosta sanat jonka aloitusrivi on pienempi kuin nykyinen rivi (y)
+      
+    if (previousWords.length > 0) {                                      
+          const prevWord = previousWords[previousWords.length - 1];      // Näistä sanoista valitaan viimeinen eli edellisen rivin viimeinen sana, vähentämällä previousWords.length - 1
+          const lastX = prevWord.x + prevWord.word.length - 1;           // Lasketaan viimeisestä sanasta viimeinen kirjain
+          return document.querySelector(                                 // Haetaan edellisen sanan viimeinen syöttökenttä, 
+              `input[data-x="${lastX}"][data-y="${prevWord.y}"]`         // ja siirrytään siihen 
+          );
+      }
+  }
+  return null;                                                            // Jos edellistä kenttää ei löydy, palautetaan null, eli ei tehdä mitään
+}
+
+function checkCrosswordCompletion() {                                     // Tehdään functio, joka tarkastaa onko ristikon kaikki syöttökentät oikein
+  let correct = true;                                                     // Luodaan muuttuja, joka tarkastaa onko ristikko täytetty oikein. Muuttuja olettaa aluksi että kaikki on oikein
+                             
+  document.querySelectorAll("#crossword input:not([disabled])").forEach((input) => { // Käydään kaikki syöttökentät läpi ja valitaan kaikki, jotka eivät ole käytössä
+      const userValue = input.value.trim().toUpperCase();                            // Haetaan pelaajan syöttämät arvot ja muutetaan ne isoiksi kirjaimiksi
+      const correctValue = input.dataset.correct;                                    // Haetaan kentän oikea arvo, joka on tallennettu data-attribuuttiin "data-correct"
+
+      input.classList.remove("correct", "incorrect", "empty");                       // Poistetaan kentästä mahdolliset aiemmat luokat
+
+      if (!userValue) {                                                              
+        input.classList.add("empty");                                                 // Jos kenttä on tyhjä, lisätään kenttään luokka "empty"
+        correct = false;                                                              // Merkitään että ristikko on kesken
+      } else if (userValue !== correctValue) {                                        // Jos kentässä on syöte
+        input.classList.add("incorrect");                                             // Tarkastetaan onko se oikein, jos arvo ei ole oikea, merkitään luokka "incorrect"
+        correct = false;
+      } else {                                                                         
+        input.classList.add("correct");                                               // Jos pelaajan syöte on oikein, merkitään luokka "correct"
+      }
+      
+  });
+  
+  if (correct) {                                                                      // Jos ristikko on oikein
+    wordContainer.classList.remove("hidden");                                         // Poistetaan luokka "hidden" keskisanan syöttökentästä
+    wordContainer.classList.add("visible");                                           // Muutetaan syöttökenttä näkyväksi
+
+    wordResult.textContent = "Mikä sana muodostuu ristikon keskelle?";                 // Lisätään pelaajalle ohjeteksti
+    wordResult.classList.add("correct");                                              // Lisätään luokka "correct", jolla voidaan muokata ulkoasua jos vastaus oin oikein
+    wordResult.classList.remove("incorrect");                                         // Poistetaan luokka "incorrect", jos pelaaja on aikaisemmin vastannut väärin
+} else {
+    wordContainer.classList.remove("visible");                                        // Jos kaikki sanat eivät ole oikein
+    wordContainer.classList.add("hidden");                                            // , poistetaan syöttökenttä näkyvistä 
+
+    wordResult.textContent = "Väärin! Yritä uudestaan!.";                             // Lisätään pelaajalle ohjeteksti
+    wordResult.classList.add("incorrect");                                            // Lisätään luokka "incorretct" joka muuttaa tekstin ulkoasua
+    wordResult.classList.remove("correct");                                           // Poistetaan luokka "correct" jos syöttö on ollut aikaisemmin oikein, mutta se on muutettu
+}
+
+}
+
+function startTimer() {                                                               // Luodaan functio ajastimen aloitus ajan tallentamiseen
+  startTime = Date.now();                                                             // Tämä tallentaa ajastimen aloitusajan milli sekuntteina
+  timerInterval = setInterval(updateTimerDisplay, 1000);                              // Tämä asettaa ajastimen päivittämään näyttöä sekunnin välein, kutsumalla updateTimerDisplay- functiota
+}
+
+function updateTimerDisplay() {                                                       // Luodaan functio tallettamaan ajastimen tämän hetkistä aikaa
+  
+  const now = Date.now();                                                             // Tallennetaan tämän hetkinen aikaleima millisekunteina
+  const timeElapsed = Math.floor((now - startTime) / 1000);                           // Tällä lasketaaan kulunut aika sekunneissa vähentämällä aloitusaika nykyhetkestä ja jakamalla se 1000
+  const minutes = Math.floor(timeElapsed / 60);                                       // Tämä laskee kuluneiden minuuttien määrän jakamalla sekunnit 60:llä
+  const seconds = timeElapsed % 60;                                                   // Lasketaan jäljellä olevat sekunnit jakojäännöksenä 60:llä
+
+  const timeString = `${minutes.toString().padStart(2, '0')}:${seconds                // Muutetaan aika merkkijonoksi "mm:ss", jossa numerot asetetaan nolliksi tarvittaessa
+      .toString()
+      .padStart(2, '0')}`;
+ 
+      document.getElementById('timeElapsed').textContent = timeString;                // Päivitetään HTML elementti joka näyttää pelaajalle ajan
+}
+
+function stopTimer() {                                                                // Luodaan functio ajastimen lopetusajan tallentamista varten
+  endTime = Date.now();                                                               // Tallennetaan ajastimen lopetusaika
+  clearInterval(timerInterval);                                                       // Pysäytetään ajastimen päivitys
+
+  const totalTime = Math.floor((endTime - startTime) / 1000);                         // Lasketaan kokonais aika vähentämällä aloitusaika lopetusajasta
+  const score = calculateScore(totalTime);                                            // Tämä laskee käyttäjän pisteet käytetyn ajan perusteella, kutsumalla "calculateScore"- functiota
+
+  wordResult.textContent += `\nSuoritusaika: ${formatTime(
+      totalTime
+  )}\nPisteet: ${score}`;                                                             // Näytetään pelaajalle pisteet ja suoritus aika
+}
+
+function calculateScore(timeInSeconds) {                                              // Luodaan funktio pisteiden laskua varten, jossa aika vaikuttaa pisteisiin.
+
+  const maxScore = 10;                                                                // Maksimipisteet 10
+  const minScore = 0;                                                                 // Minimipisteet   0
+  const fiveMinutes = 5 * 60;                                                         // Tmä muuttaa 5 minuuttia sekunneiksi
+  const fifteenMinutes = 15 * 60;                                                     // Tämä muuttaa 15 minuuttia sekunneiksi
+
+  if (timeInSeconds <= fiveMinutes) {                                                 // Jos aikaa on kuluunu vähemmän kuin 5 minuuttia, pelaaja saa täydet pisteet.
+      return maxScore;
+  
+    } else if (timeInSeconds >= fifteenMinutes) {                                     // Jos aikaa on kulunut yli 15 minuuttia, pelaaja saa 0 pistettä.
+      return minScore;
+  
+    } else {                                                                          // Muuten pisteet lasketaan suhteessa kuluneeseen aikaan.
+      const remainingTimeFraction = (fifteenMinutes - timeInSeconds) / (fifteenMinutes - fiveMinutes); // Lasketaan suhteellinen jäljellä oleva aika 5 ja 15min väliltä
+      return Math.round(remainingTimeFraction * maxScore);                            // Kerrotaan jäljellä olevan ajan suhde maksimipisteillä, ja pyöristetään lähimpään kokonaislukuun
+  }
+}
+
+function formatTime(timeInSeconds) {                                                  // Luodaan functio ajan muotoilemiseen muodossa "mm:ss"
+  
+  const minutes = Math.floor(timeInSeconds / 60);                                     // Lasketaan kuluneet minutit jakamalla kokonais aika 60:llä
+  const seconds = timeInSeconds % 60;                                                 // Lasketaan jäljellä olevat sekunnit käyttämällä jakojäännöstä. Tällä saadaan selville sekunnit jotka jäävät yli täysistä minuteista
+
+  return `${minutes.toString().padStart(2, '0')}:${seconds                            // Muutetaan minuttien ja sekunttien arvot merkkijonoiksi
+      .toString()
+      .padStart(2, '0')}`;                                                            // Lisätään ajastimeen nollia, jos merkkijonossa on alle 2 merkkiä
+}
+
+checkButton.addEventListener("click", () => {                                         // Lisätään tapahtumakuuntelija "checkButton" painikkeelle
+  checkCrosswordCompletion();                                                         // Tällä kutsutaan functiota checkCrosswordCompletion, joka tarkastaa ristikon
+});
+
+checkWordButton.addEventListener("click", () => {                                     // Lisätään tapahtumakuuntelija "checkWordButton" painikkeelle
+  const enteredWord = wordInput.value.toUpperCase().trim();                           // Tämä funktio suoritetaan, kun pelaaja painaa keskisanan tarkastuspainiketta
+  if (enteredWord === "OPERATIVET") {                                                // Jos pelaaja on syöttänyt sanan "OPERATIVET"
+      wordResult.textContent = "Oikein! Läpäisit pelin!";
+      wordResult.classList.remove("incorrect");                                      // Poistetaan virheen luokka, jos se on aiemmin lisätty
+      wordResult.classList.add("correct");                                           // Lisätään luokka "correct"
+      stopTimer();                                                                   // Pysäytetään ajastin
+  } else {
+      wordResult.textContent = "Väärin! Yritä uudelleen.";
+      wordResult.classList.remove("correct");                                        // Poistetaan onnistumisen luokka, jos se on aiemmin lisätty
+      wordResult.classList.add("incorrect");                                         // Lisätään virheen "incorrect" luokka
+  }
+});
+
+// Funktio, joka täyttää ristikon automaattisesti
+function fillCrossword() {
+  crossword.forEach(({ word, x: startX, y: startY }) => {
+      for (let i = 0; i < word.length; i++) {
+          const x = startX + i;
+          const y = startY;
+          const input = document.querySelector(
+              `#crossword input[data-x="${x}"][data-y="${y}"]`
+          );
+          if (input && !input.disabled) {
+              input.value = word[i].toUpperCase();
+          }
+      }
+  });
+}
+
+// Kutsu funktiota testauksen aikana
+fillCrossword();

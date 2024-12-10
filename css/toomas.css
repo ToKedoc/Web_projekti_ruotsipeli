@@ -60,3 +60,87 @@ main {
 footer {
     text-align: center;
 }
+
+.correct {
+    color: rgb(43, 255, 0);
+}
+
+.incorrect {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+td {
+    border: 1px solid #ccc; /* Solujen reunat */
+    aspect-ratio: 1 / 1; /* Soluista neliönmuotoisia automaattisesti */
+    width: auto; /* Automaattinen leveys */
+    height: auto; /* Automaattinen korkeus */
+    text-align: center; /* Teksti keskitetty */
+    vertical-align: middle; /* Pystysuuntainen keskitys */
+}
+table {
+    border-collapse: collapse; /* Poistaa kaksoisrajat */
+    max-width: 90vw; /* Maksimileveys 90% näytön leveydestä */
+    max-height: 80vh; /* Maksimikorkeus 80% näytön korkeudesta */
+    margin: 0 auto; /* Keskittää taulukon */
+    overflow: hidden; /* Estää sisällön ylittämisen */
+}
+input {
+    width: 100%; /* Täyttää solun leveyden */
+    height: 100%; /* Täyttää solun korkeuden */
+    text-align: center; /* Teksti keskitetty */
+    font-size: calc(1vw + 1vh); /* Skaalautuva fonttikoko */
+    border: none; /* Poistaa syöttökentän reunat */
+    box-sizing: border-box; /* Varmistaa, että paddings eivät vaikuta kokoon */
+}
+.empty {
+    background-color: rgb(245, 245, 126); /* Sama väri kuin tausta */
+    border: none; /* Poistaa reunat */
+}
+
+.empty input {
+    background-color: transparent; /* Poistaa syöttökentän taustavärin */
+    border: none; /* Poistaa syöttökentän reunat */
+    outline: none; /* Poistaa aktiivisen kentän korostuksen */
+    visibility: hidden; /* Tekee syöttökentän täysin näkymättömäksi */
+}
+
+
+
+@media (max-width: 600px) {
+    table {
+        width: 100%; /* Skaalaa koko näytön levyiseksi */
+    }
+
+    td {
+        aspect-ratio: 1 / 1; /* Solut pysyvät neliöinä */
+        width: 10vw; /* Leveys suhteessa näytön leveyteen */
+    }
+
+    input {
+        font-size: 3vw; /* Suurempi fontti pienillä näytöillä */
+    }
+}
+@media (max-width: 400px) {
+    table {
+        display: block; /* Muuttaa taulukon lohkorakenteeksi */
+    }
+
+    tr {
+        display: flex; /* Rivistä tulee vaakasuuntainen joustava rakenne */
+    }
+
+    td {
+        flex: 1; /* Jokainen solu venyy yhtä suureksi */
+        aspect-ratio: 1 / 1;
+    }
+}
+
+
