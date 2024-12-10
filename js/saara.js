@@ -16,8 +16,10 @@ const sentences = [
     "Jag behöver en dator på jobbet varje dag"
 ] 
 
-//lasketaan missä lauseessa mennään
+//muuttuja lauseen laskentaan, lasketaan missä lauseessa mennään
 let sentenceIndex = 0
+//muuttuja pisteiden laskulle, lasketaan saatavien pisteiden määrä
+let score = 0
 
 //haetaan HTML-dokumentista elementti id:llä
 const finnBox = document.getElementById("finn-box")
@@ -94,6 +96,13 @@ document.getElementById("check").addEventListener("click", () => {
         result.textContent = "Ordentligt! Fin prestation. Oikein! Hieno suoritus."
         //muuttaa lauseen tekstin vihreäksi
         result.style.color = "green" 
+
+        //jos lause menee oikein pistelaskuri päivittyy
+        score += 2
+        //haetaan html dokumentistä elementti id:llä ja asetetaan sille 
+        //päivitetty muuttujan arvo
+        document.getElementById("score").textContent = score
+
     } else {
         //lisää viestin html-elementtiin, jos lause on väärin ja näyttää käyttäjälle
         result.textContent= "Fel! Väärin"
