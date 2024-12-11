@@ -33,6 +33,8 @@ finnBox.textContent = finnSentences[sentenceIndex]
 //funktio joka alustaa pelin käyntiin, tyhjentää laatikot uudelle kierrokselle/lauseelle
 //hakee kierroksessa olevan lauseen ja sen sisältämät sanat, lisää sanat worBoxiin satunnaisessa järjestyksessä
 function initGame() {
+    // Päivittää suomenkielisen kierroksessa olevan lauseen finnBox-elementissä
+    finnBox.textContent = finnSentences[sentenceIndex];
     //tyhjentää laatikot
     //tyhjentää elementin wordBox, jotta uusi sanajoukko voidaan lisätä
     wordBox.innerHTML = ""
