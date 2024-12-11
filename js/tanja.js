@@ -27,7 +27,11 @@ const correctAnswers =
 
 let currentIndex = 0; //Aloitta ensimmäisestä kysymyksestä, seuraa mikä kysymys näytetään tällä hetkellä
 
+
+
 function setQuestion() {
+
+    // Haetaan HTML-elementit, joihin kysymys, kuva ja vastausvaihtoehdot asetetaan
     const imageElement = document.querySelector('#picture');
     const wordElement = document.querySelector('.word');
     const buttons = document.querySelectorAll('.buttons button');
@@ -46,20 +50,37 @@ function setQuestion() {
 // Tarkistetaan, vastaako käyttäjän valinta oikeaa vastausta (määritelty correctAnswers-listassa).
 
 function checkAnswer(index) {
-    if (index === correctAnswers[currentIndex]) {
-        alert('Ordentligt! :)');
-    } else {
-        alert('Fel! :(');
-    }
 
-    currentIndex++;
-    if (currentIndex < images.length) {
-        setQuestion();
+    const resultMessage = document.querySelector('.message');
+
+    if (index === correctAnswers[currentIndex]) {
+        resultMessage.textContent = 'Ordentligt! :)';  // tilalla alert
+        
+      
+        
+        currentIndex++;
+
+        if (currentIndex < images.length) {
+            
+            setTimeout (() => {
+
+                resultMessage.textContent = ''; // tyhjentää viestin
+                setQuestion();
+
+            }, 2000); // viesti näkyy 2 sek.
+
+
+        } else {
+            resultMessage.textContent = 'Spelet slut!';
+        
+        }
+
     } else {
-        alert('Spelet slut!');
+        
+        resultMessage.textContent = 'Fel! Försök igen! :(';
+        
     }
 }
-
 // Käynnistä peli
 document.addEventListener('DOMContentLoaded', () => {
     setQuestion();
