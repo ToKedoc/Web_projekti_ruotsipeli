@@ -25,6 +25,7 @@ const words = [
 const correctAnswers = 
     [0,2,2,0,1,1,0,2,1,0];
 
+
 let currentIndex = 0; //Aloitta ensimmäisestä kysymyksestä, seuraa mikä kysymys näytetään tällä hetkellä
 
 
@@ -93,6 +94,10 @@ function checkAnswer(index) {
         
         resultMessage.textContent = 'Fel! Försök igen! :(';
         resultMessage.style.color = 'red';
+
+        setTimeout(() => {
+            resultMessage.textContent = '';
+        }, 2000)
         
         }
 }
