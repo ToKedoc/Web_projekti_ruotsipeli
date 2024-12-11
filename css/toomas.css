@@ -39,11 +39,7 @@ main {
     color:rgba(245, 245, 126, 0.26) !important ;
 }
 
-@media (min-width: 768px) {
-    .nav-link {
-        font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
-    } 
-}
+
 
 .container {
     display: flex;
@@ -60,6 +56,13 @@ main {
 footer {
     text-align: center;
 }
+#timer {
+    text-align: center; /* Keskittää ajastimen */
+    font-size: 1.5rem; /* Suurentaa fonttia */
+    margin-bottom: 10px; /* Luo väli ajastimen ja taulukon väliin */
+    font-weight: bold; /* Korostaa tekstiä */
+  }
+  
 
 .correct {
     color: rgb(43, 255, 0);
@@ -78,7 +81,7 @@ footer {
 }
 
 td {
-    border: 1px solid #ccc; /* Solujen reunat */
+    border: 1px solid #ccc; /* Solujen reunat */ 
     aspect-ratio: 1 / 1; /* Soluista neliönmuotoisia automaattisesti */
     width: auto; /* Automaattinen leveys */
     height: auto; /* Automaattinen korkeus */
@@ -142,5 +145,9 @@ input {
         aspect-ratio: 1 / 1;
     }
 }
-
+@media (min-width: 768px) {
+    .nav-link {
+        font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
+    } 
+}
 
