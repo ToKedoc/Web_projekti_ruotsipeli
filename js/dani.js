@@ -43,7 +43,16 @@ let attemptsLeft = 25;   // Yrityksiä jäljellä
 
 // Näytetään yritysten määrä
 const attemptsContainer = document.querySelector("#attempts"); // <div id="attempts"></div>
-attemptsContainer.textContent = `Yrityksiä jäljellä: ${attemptsLeft}`;
+attemptsContainer.textContent = `Företag som lämnat  (Yrityksiä jäljellä): ${attemptsLeft}`;
+
+const foundPairsContainer = document.querySelector("#found-pairs");
+let foundPairs = 0; // Alustetaan löydetyt kortit
+
+//Funktio päivittämään löydettyjen parien lukua
+function updateFoundPairs() {
+    foundPairs++;
+    foundPairsContainer.textContent = `Par hittade  (Löydetyt parit): ${foundPairs}`;
+}
 
 // Lisätään tapahtumakuuntelijat kortteihin
 for (let imageCard of imageCards) {
@@ -68,14 +77,15 @@ for (let imageCard of imageCards) {
                 !matchedImage.includes(imageName) // Korttia ei saa olla jo löydetty
             ) {
                 matchedImage.push(imageName); // Lisätään pari löydettyihin
+                updateFoundPairs();          // Päivitetään köydetyt kortit
                 checkGameEnd();              // Tarkistetaan, onko peli päättynyt
             } else {
                 // Korttipari ei osunut
                 attemptsLeft--; // Vähennetään yrityksiä
-                attemptsContainer.textContent = `Yrityksiä jäljellä: ${attemptsLeft}`;
+                attemptsContainer.textContent = `Företag som lämnat  (Yrityksiä jäljellä): ${attemptsLeft}`;
                 if (attemptsLeft === 0) {
                     setTimeout(() => {
-                        alert("Yrityksesi loppuivat! Aloitetaan alusta.");
+                        alert("Dina ansträngningar tog slut! Låt oss börja från början  (Yrityksesi loppuivat! Aloitetaan alusta.)");
                         location.reload(); // Käynnistetään peli uudelleen
                     }, 500);
                 }
@@ -102,4 +112,14 @@ function clearImages() {
         }
         canClick = true; // Sallitaan klikkaaminen
     }, 800);
+}
+
+// Funktio joka tarkistaa onko peli päättynyt
+function checkGameEnd() {
+    if (matchedImage.length === sourceimages.length) {
+        setTimeout(() => {
+            alert("Grattis! Du vann spelet! (Onneksi olkoon! Sinä voitit pelin!)");
+        }, 500);
+    }
+    
 }
