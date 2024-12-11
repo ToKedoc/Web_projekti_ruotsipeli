@@ -55,6 +55,7 @@ function checkAnswer(index) {
 
     if (index === correctAnswers[currentIndex]) {
         resultMessage.textContent = 'Ordentligt! :)';  // tilalla alert
+        resultMessage.style.color = 'green';
         
       
         
@@ -72,6 +73,7 @@ function checkAnswer(index) {
 
         } else {
             resultMessage.textContent = 'Mycket bra! Spelet slut!';
+            resultMessage.style.color = 'black';
 
 
              // odottaa hetken ja loitata pelin alusta 
@@ -90,6 +92,7 @@ function checkAnswer(index) {
         } else {
         
         resultMessage.textContent = 'Fel! Försök igen! :(';
+        resultMessage.style.color = 'red';
         
         }
 }
