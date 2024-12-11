@@ -19,7 +19,7 @@ const options = [
 const words = [
     'Tekoäly','Hakukone','Hiiri','Kannettava tietokone',
     'Kuulokkeet','Ohjelmoida','Pilvipalvelu','Tietoturva',
-    'Reititin','Tietojenkäsittely'
+    'Reititin','Tietojenkäsittely',
 ];
 
 const correctAnswers = 
@@ -27,7 +27,11 @@ const correctAnswers =
 
 let currentIndex = 0; //Aloitta ensimmäisestä kysymyksestä, seuraa mikä kysymys näytetään tällä hetkellä
 
+
+
 function setQuestion() {
+
+    // Haetaan HTML-elementit, joihin kysymys, kuva ja vastausvaihtoehdot asetetaan
     const imageElement = document.querySelector('#picture');
     const wordElement = document.querySelector('.word');
     const buttons = document.querySelectorAll('.buttons button');
@@ -46,20 +50,49 @@ function setQuestion() {
 // Tarkistetaan, vastaako käyttäjän valinta oikeaa vastausta (määritelty correctAnswers-listassa).
 
 function checkAnswer(index) {
+
+    const resultMessage = document.querySelector('.message');
+
     if (index === correctAnswers[currentIndex]) {
-        alert('Ordentligt! :)');
-    } else {
-        alert('Fel! :(');
-    }
+        resultMessage.textContent = 'Ordentligt! :)';  // tilalla alert
+        
+      
+        
+        currentIndex++;
 
-    currentIndex++;
-    if (currentIndex < images.length) {
-        setQuestion();
-    } else {
-        alert('Spelet slut!');
-    }
+        if (currentIndex < images.length) {
+            
+            setTimeout (() => {
+
+                resultMessage.textContent = ''; // tyhjentää viestin
+                setQuestion();
+
+            }, 2000); // viesti näkyy 2 sek.
+
+
+        } else {
+            resultMessage.textContent = 'Mycket bra! Spelet slut!';
+
+
+             // odottaa hetken ja loitata pelin alusta 
+
+            setTimeout(() => {
+
+                currentIndex = 0;
+                resultMessage.textContent = '';
+                setQuestion();
+        
+            }, 3000); // viive
+                
+        
+        }
+
+        } else {
+        
+        resultMessage.textContent = 'Fel! Försök igen! :(';
+        
+        }
 }
-
 // Käynnistä peli
 document.addEventListener('DOMContentLoaded', () => {
     setQuestion();
