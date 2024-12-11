@@ -19,7 +19,7 @@ const options = [
 const words = [
     'Tekoäly','Hakukone','Hiiri','Kannettava tietokone',
     'Kuulokkeet','Ohjelmoida','Pilvipalvelu','Tietoturva',
-    'Reititin','Tietojenkäsittely'
+    'Reititin','Tietojenkäsittely',
 ];
 
 const correctAnswers = 
@@ -71,15 +71,27 @@ function checkAnswer(index) {
 
 
         } else {
-            resultMessage.textContent = 'Spelet slut!';
+            resultMessage.textContent = 'Mycket bra! Spelet slut!';
+
+
+             // odottaa hetken ja loitata pelin alusta 
+
+            setTimeout(() => {
+
+                currentIndex = 0;
+                resultMessage.textContent = '';
+                setQuestion();
+        
+            }, 3000); // viive
+                
         
         }
 
-    } else {
+        } else {
         
         resultMessage.textContent = 'Fel! Försök igen! :(';
         
-    }
+        }
 }
 // Käynnistä peli
 document.addEventListener('DOMContentLoaded', () => {

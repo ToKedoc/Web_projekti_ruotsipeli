@@ -94,7 +94,7 @@ footer {
     align-items: center;
     margin-bottom: 10px;
     position: relative;
-    top: 170px
+    top: 170px;
 }
 
 .message {
@@ -102,7 +102,8 @@ footer {
     text-align: center;
     margin-top: auto;
     color:darkslategray;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin-top: 30px;
 
 
     
