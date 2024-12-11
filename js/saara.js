@@ -124,6 +124,10 @@ document.getElementById("check").addEventListener("click", () => {
         //viesti html-elementtiin, näyttää käyttäjälle, että peli on päättynyt
         result.textContent = "Du har slutfört alla meningar, game over! Olet suorittanut kaikki lauseet, peli loppu!"
         result.style.color = "green"
+
+        //pelin pisteiden tallentaminen sessionstorageen
+        sessionStorage.setItem("ordtill", score)
+        console.log("Peli päättyi. Lopulliset pisteet: " + score)
     }
 })
 
