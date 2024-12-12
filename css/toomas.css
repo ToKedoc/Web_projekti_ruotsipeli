@@ -10,9 +10,13 @@ footer {
 
 main {
     background-color: rgb(245, 245, 126);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
     padding: 20px;
-    min-height: calc(100vh - 120px);
-    box-sizing: border-box;    
+    
 }
 
 .nav-item {
@@ -56,6 +60,7 @@ main {
 footer {
     text-align: center;
 }
+
 #title{
     text-align: center; /* Keskittää ajastimen */
     font-size: 2rem; /* Suurentaa fonttia */
@@ -63,24 +68,135 @@ footer {
     font-weight: bold; /* Korostaa tekstiä */
 
 }
+
 #timer {
     text-align: center; /* Keskittää ajastimen */
     font-size: 1.5rem; /* Suurentaa fonttia */
     margin-bottom: 10px; /* Luo väli ajastimen ja taulukon väliin */
     font-weight: bold; /* Korostaa tekstiä */
+}
+  #content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 10px;
+}
+
+  #crossword-container {
+    position: relative;
   }
+
+  #crossword {
+    position: relative;
+    left: -5px;
+    z-index: 1;
+
+  }
+
+  #checkButton {
+    position: relative;
+    left: 505px;
+    top: 20px;
+  }
+  button {
+    font-size: 1.2em;
+    color: rgb(94, 8, 232);
+    font-weight: bold;
+    background-color: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: rgb(5, 247, 5);
+    color: black;
+
+  }
+
+  #checkWordButton {
+    position: relative;
+    left: -40px;
+    margin-top: 10px;
+  }
+
+  #word-container {
+    position: relative;
+    top: 50px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #wordInput {
+    position: relative;
+    left: -40px;
+    margin-bottom: 10px;
+    width: 300px;
+    height: 40px;
+    padding: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgb(94, 8, 232);
+  }
+  #wordInput::placeholder {
+    color: rgb(94, 8, 232);
+  }
+
+  
+
+.images {
+    flex: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+   
+}
+
+.images li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.images span {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: rgb(94, 8, 232);
+    margin-right: 10px;
+    position: relative;
+    top: -140px;
+}
+
+.images img {
+    position: relative;
+    top: -140px;
+    width: 60px;
+    height: auto;
+    margin-right: 10px;
+    z-index: 2;
+
+}
+
   
 
 .correct {
-    color: rgb(43, 255, 0);
+    color: rgb(94, 8, 232);
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
 }
 
 .incorrect {
     color: red;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .visible {
@@ -157,3 +273,9 @@ input {
         font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
     } 
 }
+@media (max-width: 768px) {
+    #content {
+      flex-direction: column; /* Kuvien lista siirtyy ristikon alle pienillä näytöillä */
+    }
+  }
+  
