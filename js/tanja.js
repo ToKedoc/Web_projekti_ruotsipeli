@@ -1,3 +1,13 @@
+
+function loadPoints () {
+    const savedPoints = sessionStorage.getItem('Namnge bilden');
+    if (savedPoints) {
+        pisteet = parseInt(savedPoints);
+        updateScoreDisplay();
+    }
+}
+
+
 const images = [
     '../images/images_tanja/img1.png','../images/images_tanja/img2.jpg','../images/images_tanja/img3.png','../images/images_tanja/img4.webp',
     '../images/images_tanja/img5.png','../images/images_tanja/img6.jpg','../images/images_tanja/img7.png','../images/images_tanja/img8.jpg','../images/images_tanja/img9.png','../images/images_tanja/img10.webp'
@@ -28,25 +38,24 @@ const correctAnswers =
 
 let currentIndex = 0; //Aloitta ensimmäisestä kysymyksestä, seuraa mikä kysymys näytetään tällä hetkellä
 let pisteet = 0; // Alustaa pisteet
-
-
-
-function addPoints(){
-    pisteet++;
-    updateScoreDisplay();
-}
-
-
+let answeredIncorrectly = false; // seuraa onko pelaaja vastannut oikein
 
 function updateScoreDisplay() {
     const scoreElement = document.querySelector('#score');
     scoreElement.textContent = 'Pisteet:' + pisteet;
 }
 
+// Lisää pisteet vain jos vastaus on ensimmäisellä yrittämällä oikein
+function addPoints(){
+    if (!answeredIncorrectly) {
+        pisteet ++;
+        sessionStorage.setItem('Namnge bilden', pisteet.toString());
+        updateScoreDisplay();
+
+    }
+}
 
 function setQuestion() {
-
-    // Haetaan HTML-elementit, joihin kysymys, kuva ja vastausvaihtoehdot asetetaan
     const imageElement = document.querySelector('#picture');
     const wordElement = document.querySelector('.word');
     const buttons = document.querySelectorAll('.buttons button');
@@ -69,15 +78,15 @@ function checkAnswer(index) {
     const resultMessage = document.querySelector('.message');
 
     if (index === correctAnswers[currentIndex]) {
-        resultMessage.textContent = 'Ordentligt!';  
+        resultMessage.textContent = 'Ordentligt!';  // tilalla alert
         resultMessage.style.color = 'green';
-        
-      
+
         addPoints();
+      
         
         currentIndex++;
 
-        
+        answeredIncorrectly = false;
 
         if (currentIndex < images.length) {
             
@@ -90,37 +99,40 @@ function checkAnswer(index) {
 
 
         } else {
-            resultMessage.textContent = 'Mycket bra! Spelet slut!';
+            resultMessage.textContent = 'Spelet slut!';
             resultMessage.style.color = 'black';
 
 
-             // odottaa hetken ja loitata pelin alusta 
+            // odottaa hetken ja loitata pelin alusta 
 
             setTimeout(() => {
 
                 currentIndex = 0;
                 resultMessage.textContent = '';
                 setQuestion();
-        
+
             }, 3000); // viive
-                
         
         }
 
-        } else {
+    } else {
         
         resultMessage.textContent = 'Fel! Försök igen!';
         resultMessage.style.color = 'red';
 
+        answeredIncorrectly = true;
+
         setTimeout(() => {
-            resultMessage.textContent = '';
-        }, 2000)
-        
-        }
+            resultMessage.textContent= ''; //Asettaa tyhjän viestin ajan kuluttua
+        }, 2000);
+    }
 }
-// Käynnistää pelin
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    setQuestion();
+    loadPoints(); // Lataa pisteet
+    setQuestion(); // Aloitta pelin
 });
+
 
 
