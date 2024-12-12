@@ -56,6 +56,13 @@ main {
 footer {
     text-align: center;
 }
+#title{
+    text-align: center; /* Keskittää ajastimen */
+    font-size: 2rem; /* Suurentaa fonttia */
+    margin-bottom: 10px; /* Luo väli ajastimen ja taulukon väliin */
+    font-weight: bold; /* Korostaa tekstiä */
+
+}
 #timer {
     text-align: center; /* Keskittää ajastimen */
     font-size: 1.5rem; /* Suurentaa fonttia */
@@ -150,4 +157,3 @@ input {
         font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
     } 
 }
-
