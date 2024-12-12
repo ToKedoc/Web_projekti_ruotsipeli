@@ -8,6 +8,15 @@ function loadPoints () {
 }
 
 
+function resetPoints() {
+    pisteet = 0;
+    sessionStorage.setItem('Namnge bilden', pisteet.toString());
+    updateScoreDisplay();
+}
+
+
+
+
 const images = [
     '../images/images_tanja/img1.png','../images/images_tanja/img2.jpg','../images/images_tanja/img3.png','../images/images_tanja/img4.webp',
     '../images/images_tanja/img5.png','../images/images_tanja/img6.jpg','../images/images_tanja/img7.png','../images/images_tanja/img8.jpg','../images/images_tanja/img9.png','../images/images_tanja/img10.webp'
@@ -103,11 +112,12 @@ function checkAnswer(index) {
             resultMessage.style.color = 'black';
 
 
-            // odottaa hetken ja loitata pelin alusta 
+            // odottaa hetken ja lataa pelin alusta 
 
             setTimeout(() => {
 
                 currentIndex = 0;
+                resetPoints();
                 resultMessage.textContent = '';
                 setQuestion();
 
