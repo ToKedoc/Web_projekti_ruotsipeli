@@ -27,7 +27,21 @@ const correctAnswers =
 
 
 let currentIndex = 0; //Aloitta ensimmäisestä kysymyksestä, seuraa mikä kysymys näytetään tällä hetkellä
+let pisteet = 0; // Alustaa pisteet
 
+
+
+function addPoints(){
+    pisteet++;
+    updateScoreDisplay();
+}
+
+
+
+function updateScoreDisplay() {
+    const scoreElement = document.querySelector('#score');
+    scoreElement.textContent = 'Pisteet:' + pisteet;
+}
 
 
 function setQuestion() {
@@ -55,12 +69,15 @@ function checkAnswer(index) {
     const resultMessage = document.querySelector('.message');
 
     if (index === correctAnswers[currentIndex]) {
-        resultMessage.textContent = 'Ordentligt! :)';  // tilalla alert
+        resultMessage.textContent = 'Ordentligt!';  
         resultMessage.style.color = 'green';
         
       
+        addPoints();
         
         currentIndex++;
+
+        
 
         if (currentIndex < images.length) {
             
@@ -92,7 +109,7 @@ function checkAnswer(index) {
 
         } else {
         
-        resultMessage.textContent = 'Fel! Försök igen! :(';
+        resultMessage.textContent = 'Fel! Försök igen!';
         resultMessage.style.color = 'red';
 
         setTimeout(() => {
@@ -101,7 +118,7 @@ function checkAnswer(index) {
         
         }
 }
-// Käynnistä peli
+// Käynnistää pelin
 document.addEventListener('DOMContentLoaded', () => {
     setQuestion();
 });
