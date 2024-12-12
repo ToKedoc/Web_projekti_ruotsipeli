@@ -211,6 +211,8 @@ function stopTimer() {                                                          
   const totalTime = Math.floor((endTime - startTime) / 1000);                         // Lasketaan kokonais aika vähentämällä aloitusaika lopetusajasta
   const score = calculateScore(totalTime);                                            // Tämä laskee käyttäjän pisteet käytetyn ajan perusteella, kutsumalla "calculateScore"- functiota
 
+  sessionStorage.setItem("Korsord-suppgift", score);                                  // Tallennetaan pisteet kooste sivulle vientiä varten
+
   wordResult.textContent += `\nSuoritusaika: ${formatTime(
       totalTime
   )}\nPisteet: ${score}`;                                                             // Näytetään pelaajalle pisteet ja suoritus aika
@@ -263,22 +265,5 @@ checkWordButton.addEventListener("click", () => {                               
   }
 });
 
-// Funktio, joka täyttää ristikon automaattisesti
-function fillCrossword() {
-  crossword.forEach(({ word, x: startX, y: startY }) => {
-      for (let i = 0; i < word.length; i++) {
-          const x = startX + i;
-          const y = startY;
-          const input = document.querySelector(
-              `#crossword input[data-x="${x}"][data-y="${y}"]`
-          );
-          if (input && !input.disabled) {
-              input.value = word[i].toUpperCase();
-          }
-      }
-  });
-}
 
-// Kutsu funktiota testauksen aikana
-fillCrossword();
 

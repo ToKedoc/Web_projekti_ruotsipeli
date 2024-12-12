@@ -43,8 +43,6 @@ main {
     color:rgba(245, 245, 126, 0.26) !important ;
 }
 
-
-
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -62,18 +60,20 @@ footer {
 }
 
 #title{
-    text-align: center; /* Keskittää ajastimen */
-    font-size: 2rem; /* Suurentaa fonttia */
-    margin-bottom: 10px; /* Luo väli ajastimen ja taulukon väliin */
-    font-weight: bold; /* Korostaa tekstiä */
+    text-align: center; 
+    font-size: 2rem; 
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: rgb(94, 8, 232);
 
 }
 
 #timer {
-    text-align: center; /* Keskittää ajastimen */
-    font-size: 1.5rem; /* Suurentaa fonttia */
-    margin-bottom: 10px; /* Luo väli ajastimen ja taulukon väliin */
-    font-weight: bold; /* Korostaa tekstiä */
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: rgb(94, 8, 232);
 }
   #content {
     display: flex;
@@ -204,78 +204,78 @@ footer {
 }
 
 td {
-    border: 1px solid #ccc; /* Solujen reunat */ 
-    aspect-ratio: 1 / 1; /* Soluista neliönmuotoisia automaattisesti */
-    width: auto; /* Automaattinen leveys */
-    height: auto; /* Automaattinen korkeus */
-    text-align: center; /* Teksti keskitetty */
-    vertical-align: middle; /* Pystysuuntainen keskitys */
+    border: 2px solid rgb(94, 8, 232);
+    aspect-ratio: 1 / 1; 
+    width: auto; 
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
 }
 table {
-    border-collapse: collapse; /* Poistaa kaksoisrajat */
-    max-width: 90vw; /* Maksimileveys 90% näytön leveydestä */
-    max-height: 80vh; /* Maksimikorkeus 80% näytön korkeudesta */
-    margin: 0 auto; /* Keskittää taulukon */
-    overflow: hidden; /* Estää sisällön ylittämisen */
+    border-collapse: collapse;
+    max-width: 90vw;
+    max-height: 80vh;
+    margin: 0 auto;
+    overflow: hidden;
 }
 input {
-    width: 100%; /* Täyttää solun leveyden */
-    height: 100%; /* Täyttää solun korkeuden */
-    text-align: center; /* Teksti keskitetty */
-    font-size: calc(1vw + 1vh); /* Skaalautuva fonttikoko */
-    border: none; /* Poistaa syöttökentän reunat */
-    box-sizing: border-box; /* Varmistaa, että paddings eivät vaikuta kokoon */
+    width: 100%; 
+    height: 100%;
+    text-align: center;
+    font-size: calc(1vw + 1vh);
+    border: 1px solid rgb(94, 8, 232);
+    box-sizing: border-box;
 }
 .empty {
-    background-color: rgb(245, 245, 126); /* Sama väri kuin tausta */
-    border: none; /* Poistaa reunat */
+    background-color: rgb(245, 245, 126);
+    border: none;
 }
 
 .empty input {
-    background-color: transparent; /* Poistaa syöttökentän taustavärin */
-    border: none; /* Poistaa syöttökentän reunat */
-    outline: none; /* Poistaa aktiivisen kentän korostuksen */
-    visibility: hidden; /* Tekee syöttökentän täysin näkymättömäksi */
+    background-color: rgb(94, 8, 232);
+    border: none;
+    outline: none;
+    visibility: hidden;
 }
 
 
 
 @media (max-width: 600px) {
     table {
-        width: 100%; /* Skaalaa koko näytön levyiseksi */
+        width: 100%;
     }
 
     td {
-        aspect-ratio: 1 / 1; /* Solut pysyvät neliöinä */
-        width: 10vw; /* Leveys suhteessa näytön leveyteen */
+        aspect-ratio: 1 / 1;
+        width: 10vw; 
     }
 
     input {
-        font-size: 3vw; /* Suurempi fontti pienillä näytöillä */
+        font-size: 3vw; 
     }
 }
 @media (max-width: 400px) {
     table {
-        display: block; /* Muuttaa taulukon lohkorakenteeksi */
+        display: block; 
     }
 
     tr {
-        display: flex; /* Rivistä tulee vaakasuuntainen joustava rakenne */
+        display: flex; 
     }
 
     td {
-        flex: 1; /* Jokainen solu venyy yhtä suureksi */
+        flex: 1; 
         aspect-ratio: 1 / 1;
     }
 }
 @media (min-width: 768px) {
     .nav-link {
-        font-size: 2rem; /* Suurempi fonttikoko tableteilla ja suuremmilla laitteilla */
+        font-size: 2rem;
     } 
 }
 @media (max-width: 768px) {
     #content {
-      flex-direction: column; /* Kuvien lista siirtyy ristikon alle pienillä näytöillä */
+      flex-direction: column;
     }
   }
-  
+
