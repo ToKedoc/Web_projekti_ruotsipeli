@@ -266,4 +266,6 @@ checkWordButton.addEventListener("click", () => {                               
 });
 
 
-//  Koodin kirjoittamiseen on hyödynnetty oppimateriaalia kursseilta: Web-ohjelmointi(syksy 2024)(oamk), Verkkosivuntoteutus 2024(oamk), 
+//  Koodin kirjoittamiseen on hyödynnetty oppimateriaalia kursseilta: Web-ohjelmointi(syksy 2024)(oamk), Verkkosivuntoteutus 2024(oamk), Web-projekti 2024(oamk). Malliratkaisuja on katossu w3Schoolista
+//  Ratkaisujen ja virheiden hakemisessa/korjaamisessa hyödyttennyt OpenAI ChatGPT GPT-4 mallia(2024). www.chatgpt.com
+// Vian hakua suoritettu Google Chromen DevToolsia, lisäämällä console log rivejä koodiin. Rivit on poistettu valmiista koodista
