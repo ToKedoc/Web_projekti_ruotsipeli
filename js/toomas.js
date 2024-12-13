@@ -6,9 +6,9 @@ const crossword = [
   { word: "HACKER", x: 6, y: 2 },
   { word: "GRAFIKKORT", x: 9, y: 3 },
   { word: "BRANDVÄGG", x: 8, y: 4 },
-  { word: "TANGENTBOARD", x: 10, y: 5 },
+  { word: "TANGENTBORD", x: 4, y: 5 },
   { word: "HÅRDDISK", x: 5, y: 6 },
-  { word: "SERVER", x: 7, y: 7 },
+  { word: "SERVERN", x: 7, y: 7 },
   { word: "PROGRAMMER", x: 2, y: 8 },
   { word: "NÄTVERK", x: 8, y: 9 },
 ];
@@ -269,3 +269,4 @@ checkWordButton.addEventListener("click", () => {                               
 //  Koodin kirjoittamiseen on hyödynnetty oppimateriaalia kursseilta: Web-ohjelmointi(syksy 2024)(oamk), Verkkosivuntoteutus 2024(oamk), Web-projekti 2024(oamk). Malliratkaisuja on katossu w3Schoolista
 //  Ratkaisujen ja virheiden hakemisessa/korjaamisessa hyödyttennyt OpenAI ChatGPT GPT-4 mallia(2024). www.chatgpt.com
 // Vian hakua suoritettu Google Chromen DevToolsia, lisäämällä console log rivejä koodiin. Rivit on poistettu valmiista koodista
+// Funktio, joka täyttää ristikon automaattisesti
