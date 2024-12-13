@@ -134,3 +134,5 @@ document.getElementById("check").addEventListener("click", () => {
     //käynnistetään peli kutsumalla funktiota initGame
     initGame()
 
+//lähteinä koodiin olen käyttänyt kurssinmateriaalia, web-ohjelmoinnin ja web-projekti sekä verkkosivuntoteutus, W3schoolia, 
+//sekä kysytty apua tekoälyltä koodin toteuttamis vaiheessa, ChatGPT 
