@@ -35,7 +35,7 @@ let answeredIncorrectly = false; // seuraa onko pelaaja vastannut oikein
 
 function updateScoreDisplay() {
     const scoreElement = document.querySelector('#score');
-    scoreElement.textContent = 'Pisteet:' + pisteet;
+    scoreElement.textContent = `Pisteet: ${pisteet}/${images.length}`;
 }
 
 // Lisää pisteet vain jos vastaus on ensimmäisellä yrittämällä oikein
@@ -71,7 +71,7 @@ function checkAnswer(index) {
     const resultMessage = document.querySelector('.message');
 
     if (index === correctAnswers[currentIndex]) {
-        resultMessage.textContent = 'Ordentligt!'; 
+        resultMessage.textContent = 'Ordentligt! Mycket bra!'; 
         resultMessage.style.color = 'green';
 
         addPoints();
@@ -92,13 +92,12 @@ function checkAnswer(index) {
 
 
         } else {
-            resultMessage.textContent = 'Spelet slut!';
+            resultMessage.textContent = `Mycket Bra! Spelet slut! Dina poäng: ${pisteet}/${images.length}`;
             resultMessage.style.color = 'black';
 
 
-            // odottaa hetken ja lataa pelin alusta 
 
-         
+   
         
         }
 
@@ -134,9 +133,9 @@ function resetPoints() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    resetPoints();
-    loadPoints(); 
-    setQuestion(); 
+    resetPoints()
+    loadPoints(); // Lataa pisteet
+    setQuestion(); // Aloitta pelin
 });
 
 
