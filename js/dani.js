@@ -53,7 +53,7 @@ function updateFoundPairs() {
     foundPairs++;
     foundPairsContainer.textContent = `Par hittade  (Löydetyt parit): ${foundPairs}`;
     // Tallennetaan löytyneiden parien määrä logalStorageen
-    localStorage.setItem('memoryGameScore', foundPairs);
+    sessionStorage.setItem('memoryGameScore', foundPairs);
 }
 
 // Lisätään tapahtumakuuntelijat kortteihin
