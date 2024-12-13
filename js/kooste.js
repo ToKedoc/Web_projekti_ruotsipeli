@@ -1,10 +1,12 @@
 //hakee peli3 muuttujan arvoksi sessionstorageen tallennetun pistemäärän ja muuttaa sen numeroksi
 let peli3 = Number(sessionStorage.getItem("ordtill"))
 let peli4 = Number(sessionStorage.getItem("korsord"))
+let peli2 = Number(localStorage.getItem("memoryGameScore"))
 
 //hakee elementin paikan id:llä html:stä ja lisää pistemäärä koostesivun taulukkoon  
 document.getElementById("otm").textContent = peli3 
 document.getElementById("korsord").textContent = peli4
+document.getElementById("score").textContent = peli2
 
 //tähän kukin voisi lisätä samalla tyylillä oman pelinsä pisteiden haun ja viennin htmllään
 //let peli1 = Number.....
