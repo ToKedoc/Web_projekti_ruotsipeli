@@ -270,20 +270,3 @@ checkWordButton.addEventListener("click", () => {                               
 //  Ratkaisujen ja virheiden hakemisessa/korjaamisessa hyödyttennyt OpenAI ChatGPT GPT-4 mallia(2024). www.chatgpt.com
 // Vian hakua suoritettu Google Chromen DevToolsia, lisäämällä console log rivejä koodiin. Rivit on poistettu valmiista koodista
 // Funktio, joka täyttää ristikon automaattisesti
-function fillCrossword() {
-  crossword.forEach(({ word, x: startX, y: startY }) => {
-      for (let i = 0; i < word.length; i++) {
-          const x = startX + i;
-          const y = startY;
-          const input = document.querySelector(
-              `#crossword input[data-x="${x}"][data-y="${y}"]`
-          );
-          if (input && !input.disabled) {
-              input.value = word[i].toUpperCase();
-          }
-      }
-  });
-}
-
-// Kutsu funktiota testauksen aikana
-fillCrossword();
