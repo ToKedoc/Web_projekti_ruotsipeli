@@ -13,6 +13,7 @@ main {
     padding: 20px;
     min-height: calc(100vh - 120px);
     box-sizing: border-box;    
+    font-size: x-large;
 }
 
 .nav-item {
