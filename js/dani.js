@@ -39,7 +39,7 @@ let firstImageName = ''; // Ensimmäisen valitun kortin nimi
 let firstImageIdx = '';  // Ensimmäisen valitun kortin indeksi
 const matchedImage = []; // Lista osuneista korteista
 let canClick = true;     // Klikkauslukko, kun kortteja tarkistetaan
-let attemptsLeft = 25;   // Yrityksiä jäljellä
+let attemptsLeft = 20;   // Yrityksiä jäljellä
 
 // Näytetään yritysten määrä
 const attemptsContainer = document.querySelector("#attempts"); // <div id="attempts"></div>

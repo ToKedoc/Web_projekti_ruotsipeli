@@ -266,4 +266,4 @@ checkWordButton.addEventListener("click", () => {                               
 });
 
 
-
+//  Koodin kirjoittamiseen on hyödynnetty oppimateriaalia kursseilta: Web-ohjelmointi(syksy 2024)(oamk), Verkkosivuntoteutus 2024(oamk), 
