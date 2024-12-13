@@ -1,20 +1,4 @@
 
-function loadPoints () {
-    const savedPoints = sessionStorage.getItem('Namnge bilden');
-    if (savedPoints) {
-        pisteet = parseInt(savedPoints);
-        updateScoreDisplay();
-    }
-}
-
-
-function resetPoints() {
-    pisteet = 0;
-    sessionStorage.setItem('Namnge bilden', pisteet.toString());
-    updateScoreDisplay();
-}
-
-
 
 
 const images = [
@@ -114,14 +98,7 @@ function checkAnswer(index) {
 
             // odottaa hetken ja lataa pelin alusta 
 
-            setTimeout(() => {
-
-                currentIndex = 0;
-                resetPoints();
-                resultMessage.textContent = '';
-                setQuestion();
-
-            }, 3000); // viive
+         
         
         }
 
@@ -139,9 +116,27 @@ function checkAnswer(index) {
 }
 
 
+function loadPoints () {
+    const savedPoints = sessionStorage.getItem('Namnge bilden');
+    if (savedPoints) {
+        pisteet = parseInt(savedPoints);
+        updateScoreDisplay();
+    }
+}
+
+
+function resetPoints() {
+    pisteet = 0;
+    sessionStorage.setItem('Namnge bilden', pisteet.toString());
+    updateScoreDisplay();
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    loadPoints(); // Lataa pisteet
-    setQuestion(); // Aloitta pelin
+    resetPoints();
+    loadPoints(); 
+    setQuestion(); 
 });
 
 
