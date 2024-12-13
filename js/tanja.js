@@ -87,7 +87,7 @@ function checkAnswer(index) {
     const resultMessage = document.querySelector('.message');
 
     if (index === correctAnswers[currentIndex]) {
-        resultMessage.textContent = 'Ordentligt!';  // tilalla alert
+        resultMessage.textContent = 'Ordentligt!'; 
         resultMessage.style.color = 'green';
 
         addPoints();
