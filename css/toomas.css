@@ -89,14 +89,14 @@ footer {
 
   #crossword {
     position: relative;
-    left: -100px;
+    left: -10%;
     z-index: 1;
 
   }
 
   #checkButton {
     position: relative;
-    left: 480px;
+    left: 38%;
     top: 20px;
   }
   button {
