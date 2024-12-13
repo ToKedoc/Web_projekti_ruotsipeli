@@ -211,7 +211,7 @@ function stopTimer() {                                                          
   const totalTime = Math.floor((endTime - startTime) / 1000);                         // Lasketaan kokonais aika vähentämällä aloitusaika lopetusajasta
   const score = calculateScore(totalTime);                                            // Tämä laskee käyttäjän pisteet käytetyn ajan perusteella, kutsumalla "calculateScore"- functiota
 
-  sessionStorage.setItem("Korsord-suppgift", score);                                  // Tallennetaan pisteet kooste sivulle vientiä varten
+  sessionStorage.setItem("korsord", score);                                           // Tallennetaan pisteet kooste sivulle vientiä varten
 
   wordResult.textContent += `\nSuoritusaika: ${formatTime(
       totalTime
