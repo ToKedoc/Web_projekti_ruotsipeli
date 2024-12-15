@@ -1,10 +1,10 @@
 
-
-
 const images = [
     '../images/images_tanja/img1.png','../images/images_tanja/img2.jpg','../images/images_tanja/img3.png','../images/images_tanja/img4.webp',
     '../images/images_tanja/img5.png','../images/images_tanja/img6.jpg','../images/images_tanja/img7.png','../images/images_tanja/img8.jpg','../images/images_tanja/img9.png','../images/images_tanja/img10.webp'
 ];
+
+// kaikki pelin kuvat ovat https://pixabay.com/ ja poistettu niiden taustat https://www.remove.bg/fi/ sivustoa käyttäen.
 
 const options = [
     ['artificiell intelligens',' databehandling','molntjänst'],
@@ -76,7 +76,6 @@ function checkAnswer(index) {
 
         addPoints();
       
-        
         currentIndex++;
 
         answeredIncorrectly = false;
@@ -94,10 +93,6 @@ function checkAnswer(index) {
         } else {
             resultMessage.textContent = `Mycket Bra! Spelet slut! Dina poäng: ${pisteet}/${images.length}`;
             resultMessage.style.color = 'black';
-
-
-
-   
         
         }
 
@@ -133,10 +128,13 @@ function resetPoints() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    resetPoints()
     loadPoints(); // Lataa pisteet
     setQuestion(); // Aloitta pelin
 });
 
 
 
+// koodit on tuotettu aiempien kurssien materiaaleja hyödyntäen,
+// (verkkosivun toteutus, web-ohjelmointi ja web-projekti) 
+// w3school sivustoja käyttäen, sekä tekoälyn kanssa keskustelleen erilaisista toteutusvaihtoehdoista.
+// olen myös pyytänyt apua tekoälyltä onglema tilanteiden ratkaisuun.
