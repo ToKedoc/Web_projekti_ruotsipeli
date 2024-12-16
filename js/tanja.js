@@ -6,7 +6,7 @@ const images = [
 
 // kaikki pelin kuvat ovat https://pixabay.com/ ja poistettu niiden taustat https://www.remove.bg/fi/ sivustoa käyttäen.
 
-const options = [
+const options = [ // valinta vaihtoehdot jokaisa kuvaa kohden
     ['artificiell intelligens',' databehandling','molntjänst'],
     ['programmera','router','sökmotor'],
     ['molntjänst','datasäkerhet','datormus'],
@@ -19,7 +19,7 @@ const options = [
     ['databehandling','bärbar dator','artificiell intelligens'],
 ];
 
-const words = [
+const words = [ // oikeat vastaukset jokaiselle kuvalle
     'Tekoäly','Hakukone','Hiiri','Kannettava tietokone',
     'Kuulokkeet','Ohjelmoida','Pilvipalvelu','Tietoturva',
     'Reititin','Tietojenkäsittely',
@@ -28,17 +28,20 @@ const words = [
 const correctAnswers = 
     [0,2,2,0,1,1,0,2,1,0];
 
-
+// muuttujat pelin tilan seuraamiseen
 let currentIndex = 0; //Aloitta ensimmäisestä kysymyksestä, seuraa mikä kysymys näytetään tällä hetkellä
 let pisteet = 0; // Alustaa pisteet
 let answeredIncorrectly = false; // seuraa onko pelaaja vastannut oikein
 
+
+
+// funktio joka päivittää pisteiden määrän käyttöliittymään
 function updateScoreDisplay() {
     const scoreElement = document.querySelector('#score');
     scoreElement.textContent = `Pisteet: ${pisteet}/${images.length}`;
 }
 
-// Lisää pisteet vain jos vastaus on ensimmäisellä yrittämällä oikein
+// Funktio joka isää pisteen vain jos vastaus on ensimmäisellä yrittämällä oikein
 function addPoints(){
     if (!answeredIncorrectly) {
         pisteet ++;
@@ -48,12 +51,13 @@ function addPoints(){
     }
 }
 
+// Funktio asettaa seuraavan kysymyksen
 function setQuestion() {
     const imageElement = document.querySelector('#picture');
     const wordElement = document.querySelector('.word');
     const buttons = document.querySelectorAll('.buttons button');
 
-    // Asettaa kuvan ja sanan
+    // Asettaa kuvan ja sanan 
     imageElement.src = images[currentIndex];
     wordElement.textContent = words[currentIndex];
 
@@ -73,8 +77,8 @@ function checkAnswer(index) {
     if (index === correctAnswers[currentIndex]) {
         resultMessage.textContent = 'Ordentligt! Mycket bra!'; 
         resultMessage.style.color = 'green';
-
-        addPoints();
+//  lisätään piste jos oikein ja siirrytään seuraavaan kysymykseen
+        addPoints();     
       
         currentIndex++;
 
@@ -85,7 +89,7 @@ function checkAnswer(index) {
             setTimeout (() => {
 
                 resultMessage.textContent = ''; // tyhjentää viestin
-                setQuestion();
+                setQuestion();  // lataa seuraavan kysymyksen
 
             }, 2000); // viesti näkyy 2 sek.
 
@@ -101,7 +105,7 @@ function checkAnswer(index) {
         resultMessage.textContent = 'Fel! Försök igen!';
         resultMessage.style.color = 'red';
 
-        answeredIncorrectly = true;
+        answeredIncorrectly = true; // merkitään väärä vastaus
 
         setTimeout(() => {
             resultMessage.textContent= ''; //Asettaa tyhjän viestin ajan kuluttua
@@ -109,16 +113,16 @@ function checkAnswer(index) {
     }
 }
 
-
+// ladataan pisteet 
 function loadPoints () {
     const savedPoints = sessionStorage.getItem('Namnge bilden');
     if (savedPoints) {
-        pisteet = parseInt(savedPoints);
+        pisteet = parseInt(savedPoints); // pisteet muutetaan numeroiksi
         updateScoreDisplay();
     }
 }
 
-
+// Nollataan pisteen kun peli aloitettaan alusta 
 function resetPoints() {
     pisteet = 0;
     sessionStorage.setItem('Namnge bilden', pisteet.toString());
@@ -128,8 +132,8 @@ function resetPoints() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadPoints(); // Lataa pisteet
-    setQuestion(); // Aloitta pelin
+    loadPoints(); // Lataa aiemmat pisteet
+    setQuestion(); // Asetetaan ensimmäinen kysymys
 });
 
 
