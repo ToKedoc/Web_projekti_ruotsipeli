@@ -87,7 +87,7 @@ for (let imageCard of imageCards) {
                 attemptsContainer.textContent = `Företag som lämnat  (Yrityksiä jäljellä): ${attemptsLeft}`;
                 if (attemptsLeft === 0) {
                     setTimeout(() => {
-                        alert("Dina ansträngningar tog slut! Låt oss börja från början  (Yrityksesi loppuivat! Aloitetaan alusta.)");
+                        alert("Dina försök tog slut, låt oss börja om  (Yrityksesi loppuivat! Aloitetaan alusta.)");
                         location.reload(); // Käynnistetään peli uudelleen
                     }, 500);
                 }
@@ -125,3 +125,6 @@ function checkGameEnd() {
     }
     
 }
+
+// Koodin lähteenä olen käyttänyt kurssimateriaalia, edellisten kurssien materiaaleja ( web-projekti, web-ohjelmointi, verkkosivuntoteutus),
+//  W3schoolia, Youtubea sekä apua kysytty tekoälyltä koodia tehdessä (ChatGPT)

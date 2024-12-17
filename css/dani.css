@@ -8,11 +8,13 @@ footer {
     padding: 20px;
 }
 
+
 main {
     background-color: rgb(245, 245, 126);
     padding: 20px;
     min-height: calc(100vh - 120px);
-    box-sizing: border-box;    
+    box-sizing: border-box;
+    text-align: center;    
 }
 
 .nav-item {
@@ -42,6 +44,31 @@ main {
     } 
 }
 
+@media (max-width: 768px){
+    #pelialue {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .kortti{
+        width: 100px;
+        height: 100px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    #pelialue {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .kortti{
+        width: 80px;
+        height: 80px;
+    }
+
+}
+
+
+
+
 .nav-link:hover {
     color: rgba(245, 245, 126, 0.26) !important;
 }
@@ -63,8 +90,8 @@ footer {
 }
 
 .kortti {
-    width: 220px;
-    height: 220px;
+    width: 235px;
+    height: 235px;
     background-color: #ff0; /* Kortin taustaväri */
     display: flex;
     justify-content: center;
