@@ -4,7 +4,8 @@ const images = [
     '../images/images_tanja/img5.png','../images/images_tanja/img6.jpg','../images/images_tanja/img7.png','../images/images_tanja/img8.jpg','../images/images_tanja/img9.png','../images/images_tanja/img10.webp'
 ];
 
-// kaikki pelin kuvat ovat https://pixabay.com/ ja poistettu niiden taustat https://www.remove.bg/fi/ sivustoa käyttäen.
+// kaikki pelissä käytettävät kuvat ovat https://pixabay.com/ 2024 
+// ja poistettu niiden taustat https://www.remove.bg/fi/ sivustoa käyttäen.
 
 const options = [ // valinta vaihtoehdot jokaisa kuvaa kohden
     ['artificiell intelligens',' databehandling','molntjänst'],
@@ -98,6 +99,8 @@ function checkAnswer(index) {
             resultMessage.textContent = `Mycket Bra! Spelet slut! Dina poäng: ${pisteet}/${images.length}`;
             resultMessage.style.color = 'black';
         
+
+            sessionStorage.setItem('Gamefinished', 'true');
         }
 
     } else {
@@ -132,7 +135,15 @@ function resetPoints() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadPoints(); // Lataa aiemmat pisteet
+   const isGameFinished = sessionStorage.getItem('GameFinished');
+
+   if (isGameFinished === 'true') {
+        resetPoints();
+        sessionStorage.setItem('GameFinished' , 'false')
+   }
+   
+   
+   
     setQuestion(); // Asetetaan ensimmäinen kysymys
 });
 
@@ -140,5 +151,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // koodit on tuotettu aiempien kurssien materiaaleja hyödyntäen,
 // (verkkosivun toteutus, web-ohjelmointi ja web-projekti) 
-// w3school sivustoja käyttäen, sekä tekoälyn kanssa keskustelleen erilaisista toteutusvaihtoehdoista.
-// olen myös pyytänyt apua tekoälyltä onglema tilanteiden ratkaisuun.
+// www.w3schools.com sivustoja käyttäen, sekä tekoälyn kanssa keskustelleen erilaisista toteutusvaihtoehdoista (www.chatgpt.com).
